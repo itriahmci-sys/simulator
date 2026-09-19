@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="社區診所集中支援管理中心互動模擬：探索規模、成本、流程彈性與多方治理。所有數值皆為示範假設。">
+  <meta name="theme-color" content="#15594c"><meta name="robots" content="noindex,nofollow">
+  <title>共好 Clinic Commons｜社區診所集中支援管理中心</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%2315594c'/%3E%3Cpath d='M17 9h6v8h8v6h-8v8h-6v-8H9v-6h8z' fill='%23e5f1c6'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#simulation">跳至模擬器</a>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="共好 Clinic Commons 首頁"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M12 5h8v7h7v8h-7v7h-8v-7H5v-8h7z" fill="currentColor"/></svg></span><span>共好<span class="brand-en">CLINIC COMMONS</span></span></a>
+    <nav aria-label="主選單"><a href="#simulation" class="active">營運模擬</a><a href="#governance">流程與治理</a><a href="#assumptions">模型假設</a></nav>
+    <span class="header-tag"><span class="status-dot"></span> 中心營運規劃版</span>
+  </header>
+  <main id="top">
+    <section id="simulation" class="simulation-section" aria-labelledby="page-title">
+      <div class="intro">
+        <div><div class="eyebrow">COMMUNITY CARE, SHARED SUPPORT</div><h1 id="page-title">社區診所集中支援管理中心</h1><p class="intro-sub">把支援集中，讓診療保有自己的步調。</p><p class="intro-detail">像微型企業一樣承擔固定成本，像小型工坊一樣保有流程習慣。<br class="desktop-break">從一組營運假設出發，探索共同支援的規模效益與代價。</p></div>
+        <div class="intro-art" aria-hidden="true"><svg viewBox="0 0 310 150"><path d="M55 48C90 48 84 93 142 82M255 44C226 44 220 83 166 82M78 130C93 130 105 94 142 89M254 124C220 124 212 96 166 89" fill="none" stroke="#aac7b9" stroke-width="2" stroke-dasharray="4 5"/><rect x="23" y="14" width="68" height="62" rx="17" fill="#e0eecb"/><rect x="220" y="12" width="64" height="62" rx="17" fill="#e8e1f3"/><rect x="38" y="101" width="73" height="43" rx="13" fill="#f7e5d2"/><rect x="224" y="97" width="70" height="43" rx="13" fill="#d9e9f6"/><g fill="none" stroke="#537367" stroke-width="2"><path d="M40 59V35l17-10 17 10v24H40m12 0V46h10v13m-5-25v9m-4-5h8M237 57V32h29v25m-22 0V43h15v14m-8-31v10m-5-5h10M56 127h37m-29-9v9m10-13v13m10-9v9M242 112h32v17h-32z"/></g><circle cx="153" cy="83" r="37" fill="#15594c"/><path d="M148 64h10v14h14v10h-14v14h-10V88h-14V78h14z" fill="#e4f0c9"/></svg></div>
+      </div>
+      <div class="notice"><span class="notice-icon" aria-hidden="true">i</span><p><strong>示範模型，非台灣實證資料。</strong> 金額為新台幣／月；採同等診療量比較，包含中心成本與建置攤提，不推估醫療品質或營收。</p><a href="#assumptions">查看假設 <span aria-hidden="true">↗</span></a></div>
+      <div class="workspace">
+        <aside class="control-panel" aria-labelledby="controls-title">
+          <div class="panel-heading"><div><span class="eyebrow small">01 / CONFIGURE</span><h2 id="controls-title">設定營運情境</h2></div><button id="reset" class="text-button" type="button">重設</button></div>
+          <fieldset class="preset-field"><legend>從情境開始</legend><div class="preset-group"><button type="button" data-preset="pilot">小型試辦</button><button type="button" data-preset="balanced" class="selected" aria-pressed="true">漸進共用</button><button type="button" data-preset="integrated">高度整合</button></div></fieldset>
+          <div class="control clinic-count"><div class="control-label"><label for="n">參與診所數量</label><div class="number-wrap"><input type="number" id="n-number" min="1" max="200" step="1" value="60" aria-label="參與診所數量精確輸入"><span>家</span></div></div><input type="range" id="n" min="1" max="200" value="60" step="1"><div class="range-end"><span>1 家</span><span>200 家</span></div></div>
+          <div class="controls-divider">共用服務配置</div>
+          <div id="service-controls"></div>
+          <div class="controls-divider">流程與成本實現</div>
+          <div id="process-controls"></div>
+          <label class="switch-row" for="exceptions"><span><strong>保留診所例外申請</strong><small>允許在共同規則內保有差異</small></span><input type="checkbox" id="exceptions" checked role="switch"><span class="switch-track" aria-hidden="true"></span></label>
+          <div class="control-note"><span aria-hidden="true">↗</span> 拖曳即時重算。金額與分攤細節可在下方「模型假設」調整。</div>
+        </aside>
+        <div class="result-panel">
+          <div class="results-heading"><div><span class="eyebrow small">02 / EXPLORE</span><h2>集中之後，改變多少？</h2></div><span class="live-badge"><span class="status-dot"></span> 即時試算</span></div>
+          <div class="metric-grid">
+            <article class="metric-card primary"><p id="saving-label">每家診所每月淨節省</p><div class="metric-value" id="net-saving">—</div><p class="metric-foot" id="saving-percent">含中心月費與建置攤提</p><span class="metric-glyph" aria-hidden="true">↗</span></article>
+            <article class="metric-card"><p>每家所需月費</p><div class="metric-value" id="required-fee">—</div><p class="metric-foot">中心全成本 ÷ 參與診所數</p></article>
+            <article class="metric-card"><p>中心每月總預算</p><div class="metric-value" id="center-budget">—</div><p class="metric-foot" id="budget-foot">固定＋變動＋建置攤提</p></article>
+            <article class="metric-card"><p>每家診所釋出工時</p><div class="metric-value" id="hours-saved">—</div><p class="metric-foot">行政與 IT 工時／月，非現金收益</p></article>
+          </div>
+          <div class="chart-row">
+            <article class="card cost-card"><div class="card-heading"><div><h3>一間診所的成本去向</h3><p>每家每月 · 萬元 · 含未改變的診療成本</p></div><span class="subtle-tag">同等診療量</span></div><div id="cost-chart" class="cost-chart" role="img" aria-label="單獨經營與集中支援成本比較"></div><div class="legend"><span><i style="--legend:#d5dcd7"></i>診療等不變成本</span><span><i style="--legend:#a9c9b8"></i>診所支援支出</span><span><i style="--legend:#235f50"></i>中心月費</span></div><div class="chart-insight" id="cost-insight"></div></article>
+            <article class="card budget-card"><div class="card-heading"><div><h3>中心收支能否站穩？</h3><p>收費試算與全成本回收</p></div><span class="small-icon" aria-hidden="true">＋</span></div><dl class="budget-lines" id="budget-lines"></dl><label class="fee-input-label" for="targetFee">試算每家月費 <div><input id="targetFee" type="number" min="0" max="200000" step="1000" value="22000"><span>元</span></div></label><div id="budget-balance" class="budget-balance"></div><p class="micro">上方成本比較採「所需月費」；此試算收費僅用於中心收支，不改變資源成本。</p></article>
+          </div>
+          <article class="card scale-card"><div class="card-heading"><div><h3>規模擴大，何時開始划算？</h3><p>保持其他假設不變，試算 1–200 家的每家月淨節省</p></div><span id="threshold-label" class="threshold-badge"></span></div><div id="scale-chart" class="scale-chart"></div><div class="scale-footer"><span><i class="point-dot"></i> 目前規模 <strong id="current-scale">60 家</strong></span><span>轉正門檻包含中心費用；不是營收獲利預測</span></div></article>
+          <div class="decision-strip" id="decision-insight" aria-live="polite"></div>
+          <div class="scenario-actions"><div><button type="button" id="pin-scenario" class="primary-button"><span aria-hidden="true">＋</span> 保留此情境比較</button><span class="micro">保存在此瀏覽器</span></div><button type="button" id="export-csv" class="secondary-button">匯出試算 CSV <span aria-hidden="true">↓</span></button></div>
+          <div id="scenario-comparison" hidden></div>
+        </div>
+      </div>
+    </section>
+    <section id="governance" class="governance-section" aria-labelledby="governance-title">
+      <div class="section-heading"><div><span class="eyebrow">03 / PEOPLE & PROCESS</span><h2 id="governance-title">共用後援，不代表只有一種做法。</h2></div><p>標準化處理共通工作，例外機制容納診所差異。<br>成本之外，也把治理負擔放上桌。</p></div>
+      <div class="governance-grid">
+        <article class="card process-card"><div class="card-heading"><div><h3>效率、彈性與協調的三角關係</h3><p>隨左側假設即時變動</p></div></div><div class="process-meters" id="process-meters"></div><div class="hours-summary" id="hours-summary"></div><div class="process-boundary"><span class="boundary-label green">適合共同化</span><p>採購規格、帳務、排班工具、IT 維運、資料交換介面</p><span class="boundary-label purple">保留專業自主</span><p>臨床判斷、醫病溝通、個案照護；不以流程指標取代</p></div><p class="micro">彈性與協調分數為 0–100 的示意指標，非量表、品質評分或台灣調查值。協調分數越高代表投入需求越高。</p></article>
+        <article class="card stakeholders-card"><div class="card-heading"><div><h3>多方共同治理</h3><p>示範席次配置 · 所有單一方均未過半</p></div><span class="subtle-tag lavender">六方協作</span></div><div class="stakeholder-top"><div class="governance-donut" role="img" aria-label="診所30%、公部門20%、病人社區15%、醫護照護15%、HIS技術10%、私人保險10%"><div><strong>共同<br>支援中心</strong><span>共享決策</span></div></div><ul class="stakeholder-list"><li><i style="background:#39765e"></i><span>診所／醫師代表</span><strong>30%</strong></li><li><i style="background:#91b09a"></i><span>公部門／健保代表</span><strong>20%</strong></li><li><i style="background:#d6bf8c"></i><span>病人／社區代表</span><strong>15%</strong></li><li><i style="background:#a9a1c8"></i><span>醫護／照護專業</span><strong>15%</strong></li><li><i style="background:#8bb5ce"></i><span>HIS／技術業者</span><strong>10%</strong></li><li><i style="background:#e5ad94"></i><span>私人保險</span><strong>10%</strong></li></ul></div><div class="insurance-note"><strong>私人保險是參與者之一。</strong><p>可參與支付設計、風險分攤與成效討論；不單獨主導中心、臨床流程或資料使用。</p></div><div class="governance-rules"><div><span>決策</span><p>重大事項須至少 2/3 同意，且包含診所及病人代表支持。</p></div><div><span>責任</span><p>中心統籌服務與稽核；診所負責臨床決策；HIS 業者負責系統介接與維運。</p></div><div><span>制衡</span><p>採購揭露利益衝突、資料最小權限、可申訴與退出；出資不自動換取決策權。</p></div></div><p class="micro">此配置與規則是討論提案，並非現行制度；席次未納入成本公式。</p></article>
+      </div>
+    </section>
+    <section id="assumptions" class="assumptions-section" aria-labelledby="assumptions-title">
+      <div class="section-heading"><div><span class="eyebrow">04 / OPEN MODEL</span><h2 id="assumptions-title">讓每個假設，都可以被討論。</h2></div><p>模型版本 1.0 · 示範參數，不引用實證估計<br>平均診所、固定服務量、全成本平均分攤</p></div>
+      <details class="card assumption-details" open><summary><span><strong>基礎數字與分攤設定</strong><small>可編輯 · 更換成您自己的情境假設</small></span><span class="chevron" aria-hidden="true">＋</span></summary><div class="assumption-grid" id="assumption-inputs"></div><div class="assumption-note">分攤方式固定為各診所等額，參與診所視為同規模。沒有預設補助、商保挹注、利潤或融資利息。例外處理成本及中心人力服務已列於變動費，不再重複加計。</div></details>
+      <details class="card formula-details"><summary><span><strong>計算公式、係數與解讀限制</strong><small>展開檢查模型如何得到結果</small></span><span class="chevron" aria-hidden="true">＋</span></summary><div class="formula-content"><p><strong>符號：</strong>N＝診所數；p／t／a／s／d／r 分別為採購、IT、共用行政、標準化、流程差異與成本實現比例，均轉為 0–1；e＝保留例外時為 1，否則為 0。所有金額為元，所有係數皆為自行設定的示範假設。</p><table class="formula-table"><thead><tr><th>項目</th><th>公式／設定</th></tr></thead><tbody>
+      <tr><td>規模效應 q</td><td>1 − exp(−(N−1) / 40)。以飽和曲線表示議價邊際效益遞減；不是統計估計。</td></tr>
+      <tr><td>每家採購節省</td><td>採購基準 × p × 18% × q。1 家時無團購折扣。</td></tr>
+      <tr><td>每家 IT 節省</td><td>IT 基準 × t × (30% + 25% × q)。中心 IT 支出另列。</td></tr>
+      <tr><td>每家行政現金節省</td><td>行政基準 × a × (30% + 40% × s) × r。r 表示可減少聘用、外包或加班支出的比例；未實現的工時不折算為現金。</td></tr>
+      <tr><td>中心固定月成本 F</td><td>固定基礎 + 120,000p + 160,000t + 180,000a + 100,000s。即使各服務設為零，仍計已設立中心的固定基礎。</td></tr>
+      <tr><td>中心每家變動月成本 V</td><td>1,500p + 2,200t + 5,500a + 1,200s + 2,800asd × (有例外機制：1；無：0.4) + 3,000td(1−s)。末兩項分別是例外／衝突處理與異質系統調整費。</td></tr>
+      <tr><td>建置與導入 I</td><td>中心建置基礎 + N × 30,000 × (a+t+s) / 3；按設定月數 M 平均攤提。未估融資、稅務與汰換。</td></tr>
+      <tr><td>中心預算 B 與所需月費</td><td>B＝F + NV + I/M；每家月費＝B/N。為全成本回收所需費用，非市場報價。</td></tr>
+      <tr><td>成本比較</td><td>每家集中後成本＝基準總成本 − 採購／IT／行政節省 + B/N。全體總成本＝每家成本 × N；中心不重複加計。節省轉正門檻逐一檢查 1–200 家。</td></tr>
+      <tr><td>中心收支</td><td>試算每家月費 × N − B。收支含攤提，非現金流；全成本回收月費不含利潤，亦無預設補助。</td></tr>
+      <tr><td>診所釋出工時 H</td><td>基準工時 × [(0.42a+0.18t+0.18s) × (1−0.30d(1−s)) − 0.06asd − 0.02easd]，下限為 0。屬行政與 IT 工作。</td></tr>
+      <tr><td>中心支援工時 C</td><td>80 + 240(p+t+a)/3 + N × [55a(1−0.35s)+10t+5p+8dsa]。是成本中既有服務的工時表示，不另外加計費用。全體淨省工時＝NH−C。</td></tr>
+      <tr><td>流程彈性指標</td><td>100 − (45s+15a+8t)(1+0.25d) + 18es，限制於 0–100。單獨經營設為 100 作參考，僅表示本地流程選擇空間。</td></tr>
+      <tr><td>協調投入指標</td><td>10 + 40sd + 20a + 15t + 10√(N/200) + 6es，限制於 0–100。單獨經營的跨診所協調設為 0，不代表診所沒有其他管理工作。</td></tr>
+      </tbody></table><div class="limits-note"><strong>適用範圍</strong><p>用於比較假設與討論營運設計；未處理科別、城鄉、診療量、薪資、健保支付與個別 HIS 契約差異，亦未估病人結果、醫療風險、營收增加、擴張容量上限與退出成本。工時、成本及指標為平行示範模型，並非工時乘薪資即可完全核對。正式規劃應以實際帳務及流程訪談校準。</p></div></div></details>
+    </section>
+  </main>
+  <footer><div class="footer-brand">共好 <span>CLINIC COMMONS</span></div><p>讓規模服務診所，讓治理服務社區。</p><span>示範模擬 v1.0 · 無病人資料</span></footer>
+  <div id="toast" class="toast" role="status"></div>
+</body>
+</html>
